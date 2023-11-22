@@ -24,7 +24,7 @@ services:
         #seção onde é definida a montagem bind para o volume da aplicação em desenvolvimento
         #Necessário mapear diretório do host que contém a aplicação a ser desenvolvida
         volumes:
-            - /root/agendae-api:/app
+            - ${DIR}:/app
         environment:
             - APP_ENV=local
         labels:
@@ -32,10 +32,11 @@ services:
             - traefik.network=traefik-public
             #definição da porta de entrada do traefik proxy
             - traefik.http.routers.laravel-rtr.entrypoints=websecure
-            #definição da rota via traefik proxy
-            - traefik.http.routers.laravel-rtr.rule=Host(`back.guilhermebraz.tech`)
             - traefik.http.routers.laravel-rtr.tls=true
             - traefik.http.routers.laravel-rtr.tls.certresolver=letsencrypt
-            #definição do serviço via traefik proxy
             - traefik.http.services.laravel-svc.loadbalancer.server.port=80
-            # - traefik.http.routers.laravel-rtr.middlewares=basic-auth@file
+
+            # - traefik.http.routers.laravel-rtr.entrypoints=web
+            # - traefik.http.services.laravel-svc.loadbalancer.server.port=80
+
+            - traefik.http.routers.laravel-rtr.rule=Host(`${APP}`)
