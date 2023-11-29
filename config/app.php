@@ -57,7 +57,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'site_url' => env('SITE_URL', 'http://localhost:3000'),
+    'site_url' => env('SITE_URL', 'https://guilhermebraz.tech'),
 
     'asset_url' => env('ASSET_URL'),
 
